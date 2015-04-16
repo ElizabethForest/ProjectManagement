@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     }
 
     public void openDictionary(View v){
-        Intent intent = new Intent(this, DictionaryAllActivity.class);
+        Intent intent = new Intent(this, LevelSelect.class);
         startActivity(intent);
     }
 }
