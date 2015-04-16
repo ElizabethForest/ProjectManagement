@@ -2,4 +2,32 @@
 <resources>
     <style name="AppTheme" parent="android:Theme.Material.Light">
     </style>
+
+    <style name="AppTheme.greenbutton" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#575C7F</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/green_button</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.bluetextfeild" parent="AppTheme">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#575C7F</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/blue_textbox</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
+    <style name="AppTheme.creamtext" parent="AppTheme">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#776A35</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/cream_textbox</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
 </resources>

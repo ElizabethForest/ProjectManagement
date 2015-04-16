@@ -1,10 +1,13 @@
 package com.example.lizzy.languageapp_10;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -12,7 +15,29 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        //TODO database stuff
+        Settings.setUpBadges();
+        if (Settings.name == null){
+            setContentView(R.layout.enter_name_age);
+        } else {
+            setContentView(R.layout.activity_welcome);
+            ((TextView) findViewById(R.id.welcome)).setText("Welcome " + Settings.name);
+        }
+
+
+    }
+
+    public void setAgeName(View v){
+        TextView nameText = (TextView) findViewById(R.id.enterName);
+        TextView ageText = (TextView) findViewById(R.id.enterAge);
+        if (nameText.getText().toString().trim().equals("") || ageText.getText().toString().trim().equals("")) {
+            Toast.makeText(this, "Please enter details before continuing.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Settings.name = nameText.getText().toString();
+        Settings.age = Integer.parseInt(ageText.getText().toString());
+        setContentView(R.layout.inital_welcome);
+        ((TextView) findViewById(R.id.welcome)).setText("Welcome " + Settings.name);
     }
 
 
@@ -36,6 +61,12 @@ public class MainActivity extends Activity {
     }
 
     public void openLevelSelect(View v){
-        setContentView(R.layout.level_select);
+        Intent intent = new Intent(this, LevelSelect.class);
+        startActivity(intent);
+    }
+
+    public void openDictionary(View v){
+        Intent intent = new Intent(this, LevelSelect.class);
+        startActivity(intent);
     }
 }

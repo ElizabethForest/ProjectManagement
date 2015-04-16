@@ -16,6 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LevelSelect"
+            android:label="@string/title_activity_level_select" >
+        </activity>
+        <activity
+            android:name=".Help"
+            android:label="@string/title_activity_help" >
+        </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name=".BadgeActivity"
+            android:label="@string/title_activity_badge" >
+        </activity>
+        <activity
+            android:name=".LevelInfo"
+            android:label="@string/title_activity_level_info" >
+        </activity>
     </application>
 
 </manifest>

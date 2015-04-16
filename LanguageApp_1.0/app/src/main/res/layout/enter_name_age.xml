@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/AppTheme.bluetextfeild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Name"
+        android:id="@+id/textView"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        style="@style/AppTheme.bluetextfeild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Age"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="123dp" />
+
+    <EditText
+        style="@style/AppTheme.creamtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:ems="10"
+        android:id="@+id/enterName"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        style="@style/AppTheme.creamtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enterAge"
+        android:inputType="number"
+        android:hint="Age"
+        android:ems="5"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" />
+
+    <Button
+        style="@style/AppTheme.greenbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/enterNameAgeButton"
+        android:onClick="setAgeName"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp" />
+
+</RelativeLayout>

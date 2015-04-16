@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.lizzy.languageapp_10.BadgeView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/badgeimage"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/badgedescription"
+        android:textSize="30sp"
+        android:textColor="#776A35"
+        android:textStyle="bold"
+        android:gravity="center_vertical"/>
+
+
+</LinearLayout>

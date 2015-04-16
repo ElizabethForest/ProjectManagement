@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/AppTheme.bluetextfeild"
+        android:text="Welcome Player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:id="@+id/welcome"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="@style/AppTheme.greenbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start!"
+        android:id="@+id/about"
+        android:onClick="openLevelSelect"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="30dp" />
+</RelativeLayout>
