@@ -1,6 +1,6 @@
 package com.example.lizzy.languageapp_10;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,25 +15,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DB;
-import database.Word;
-
-
-public class DictionaryAllActivity extends ActionBarActivity {
+public class DictionaryAllActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dictionary_all);
         testPreLoadedSQLiteDb();
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dictionary_all, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -63,12 +58,11 @@ public class DictionaryAllActivity extends ActionBarActivity {
             throw new Error("Unable to create database");
         }
 
-
         // get all locations
         if ( db.open() ) {
             Log.d("myTag", "Database is open  equals true");
             List<Word> words = db.getWords();
-
+            Log.w("DB", "words have been gotten");
 
             //gets the first word and assigns it to a textview
             // for testing purpose
@@ -92,6 +86,7 @@ public class DictionaryAllActivity extends ActionBarActivity {
                 englishguguList.add(listItem);
 
             }
+            Log.w("Dicct", "Word details set");
 
 
 

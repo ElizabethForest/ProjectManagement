@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +22,9 @@ import java.util.List;
 public class DB extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "data/data/zoe.com.dictionarydatabasedemo/databases/";
+//    private static String DB_PATH = "data/data/zoe.com.dictionarydatabasedemo/databases/";
+    private static String DB_PATH = "data/data/com.example.lizzy.languageapp_10/databases/";
+
     private static String DB_NAME = "LanguageAppDatabase";
     private static String TABLE_LOCATION = "Dictionary";
 
@@ -52,13 +55,9 @@ public class DB extends SQLiteOpenHelper {
             this.getReadableDatabase();
 
             try {
-
                 copyDataBase();
-
             } catch (IOException e) {
-
                 throw new Error("Error copying database");
-
             }
         }
 
@@ -96,12 +95,15 @@ public class DB extends SQLiteOpenHelper {
 
         //Open your local db as the input stream
         InputStream myInput = context.getAssets().open("LanguageAppDatabase.sqlite");
+        Log.w("DB", "1");
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
+        Log.w("DB", "2");
 
         //Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
+        Log.w("DB", "3");
 
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
@@ -109,12 +111,13 @@ public class DB extends SQLiteOpenHelper {
         while ((length = myInput.read(buffer))>0){
             myOutput.write(buffer, 0, length);
         }
+        Log.w("DB", "4");
 
         //Close the streams
         myOutput.flush();
         myOutput.close();
         myInput.close();
-
+        Log.w("DB", "5");
     }
 
     //Open the database

@@ -208,6 +208,25 @@
                 android:layout_column="0"
                 android:onClick="checkUserGuesses"/>
         </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LevelUp"
+                android:id="@+id/levelUp"
+                android:layout_column="0"
+                android:onClick="LevelUp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </TableRow>
     </TableLayout>
 
 </RelativeLayout>

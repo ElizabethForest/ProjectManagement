@@ -412,4 +412,12 @@ public class GamePlayTestActivity extends Activity {
 
     }
 
+    public void LevelUp(View v){
+
+//        if (levelLevel == Settings.currentLevel){
+//            Settings.currentLevel += 1;
+//        }
+        finish();
+
+    }
 }

@@ -6,10 +6,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,23 +19,38 @@
         </activity>
         <activity
             android:name=".LevelSelect"
-            android:label="@string/title_activity_level_select" >
+            android:label="@string/title_activity_level_select"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Help"
-            android:label="@string/title_activity_help" >
+            android:label="@string/title_activity_help"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".About"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".BadgeActivity"
-            android:label="@string/title_activity_badge" >
+            android:label="@string/title_activity_badge"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".LevelInfo"
-            android:label="@string/title_activity_level_info" >
+            android:label="@string/title_activity_level_info"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".DictionaryAllActivity"
+            android:label="DictionaryAllActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".GamePlayTestActivity"
+            android:label="GamePlayTestActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -24,3 +24,4 @@ proguard/
 
 # Log Files
 *.log
+LanguageApp_1.0/app/src/main/assets/LanguageAppDatabase.sqlite
