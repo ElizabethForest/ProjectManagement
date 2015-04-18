@@ -52,17 +52,16 @@ public class DictionaryAllActivity extends Activity {
         DB db = new DB(this);
 
         // copy assets DB to app DB.
-        try {
-            db.create();
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
+//        try {
+//            db.create();
+//        } catch (IOException ioe) {
+//            throw new Error("Unable to create database");
+//        }
 
         // get all locations
         if ( db.open() ) {
             Log.d("myTag", "Database is open  equals true");
             List<Word> words = db.getWords();
-            Log.w("DB", "words have been gotten");
 
             //gets the first word and assigns it to a textview
             // for testing purpose

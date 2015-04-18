@@ -1,6 +1,7 @@
 package com.example.lizzy.languageapp_10;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,11 @@ public class LevelInfo extends Activity {
         finish();
     }
 
+    public void startGame(View v){
+        Intent intent = new Intent(this, GamePlayTestActivity.class);
+        intent.putExtra("selectedLevel", levelLevel);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

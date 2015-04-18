@@ -16,14 +16,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO database stuff
-        Settings.setUpBadges();
-        if (Settings.name == null){
+        DB db = new DB(this);
+        if(db.open()){
+            Settings.getData(db);
+            Settings.setUpBadges(db);
+        }
+        db.close();
+
+        Toast.makeText(this, Settings.name, Toast.LENGTH_SHORT).show();
+
+        if (Settings.name == null || Settings.name.equals("")){
             setContentView(R.layout.enter_name_age);
         } else {
             setContentView(R.layout.activity_welcome);
             ((TextView) findViewById(R.id.welcome)).setText("Welcome " + Settings.name);
         }
-
 
     }
 
@@ -38,6 +45,13 @@ public class MainActivity extends Activity {
         Settings.age = Integer.parseInt(ageText.getText().toString());
         setContentView(R.layout.inital_welcome);
         ((TextView) findViewById(R.id.welcome)).setText("Welcome " + Settings.name);
+
+        DB db = new DB(this);
+        if(db.open()){
+            Settings.saveUserDetails(db);
+        }
+        db.close();
+
     }
 
 

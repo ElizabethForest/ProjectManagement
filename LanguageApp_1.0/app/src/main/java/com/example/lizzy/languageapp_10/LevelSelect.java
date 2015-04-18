@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.example.lizzy.languageapp_10.R;
-
 public class LevelSelect extends Activity {
 
     @Override
@@ -23,7 +21,7 @@ public class LevelSelect extends Activity {
         RelativeLayout.LayoutParams params;
         LevelButton lb;
         int previousId = 0;
-        for (int i = 0; i <= Settings.totalLevels; i++){
+        for (int i = 0; i <= Settings.TOTAL_LEVELS; i++){
             Log.w("MyApp", i + "");
             lb = new LevelButton(this, i);
             lb.setId((i + 1));
@@ -92,9 +90,6 @@ public class LevelSelect extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void openLevel(View v){
-
-    }
 }
 
 

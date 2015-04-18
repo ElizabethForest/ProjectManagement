@@ -54,6 +54,7 @@ public class GamePlayTestActivity extends Activity {
     String message = "";
     Integer totalCorrect = 0;
     Boolean wordsMatchPair = false;
+    int levelLevel;
 
 
     @Override
@@ -63,6 +64,8 @@ public class GamePlayTestActivity extends Activity {
         testSQLiteDbSelectedWordsOnly();
         assignValuesfromWordList();
         textSetter();
+        levelLevel = getIntent().getIntExtra("selectedLevel", 0);
+
         // refer to the user guess buttons
         buttonUserGuess1 = buttonUserGuess1Listener();
         buttonUserGuess2 = buttonUserGuess2Listener();

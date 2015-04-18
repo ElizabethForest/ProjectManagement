@@ -54,8 +54,8 @@ public class LevelButton extends Button implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (level <= Settings.currentLevel) {
-            //Intent intent = new Intent(getContext(), LevelInfo.class);
-            Intent intent = new Intent(getContext(), GamePlayTestActivity.class);
+            Intent intent = new Intent(getContext(), LevelInfo.class);
+            //Intent intent = new Intent(getContext(), GamePlayTestActivity.class);
 //            Bundle b = new Bundle();
 //            b.putInt("selectedLevel", level);
             intent.putExtra("selectedLevel", level);

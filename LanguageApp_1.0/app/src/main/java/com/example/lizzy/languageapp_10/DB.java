@@ -26,7 +26,10 @@ public class DB extends SQLiteOpenHelper {
     private static String DB_PATH = "data/data/com.example.lizzy.languageapp_10/databases/";
 
     private static String DB_NAME = "LanguageAppDatabase";
-    private static String TABLE_LOCATION = "Dictionary";
+    private static String TABLE_DICT = "Dictionary";
+    private static String TABLE_STATS = "Stats";
+    private static String TABLE_DATA = "UserData";
+    private static String TABLE_BADGES = "Badges";
 
     private final Context context;
     private SQLiteDatabase db;
@@ -34,21 +37,27 @@ public class DB extends SQLiteOpenHelper {
 
     // constructor
     public DB(Context context) {
-
         super( context , DB_NAME , null , 1);
         this.context = context;
 
+        if(!checkDataBase()){
+            try {
+                create();
+            } catch (IOException e) {
+                throw new Error("Unable to create database");
+            }
+        }
     }
 
 
     // Creates a empty database on the system and rewrites it with your own database.
     public void create() throws IOException{
 
-        boolean dbExist = checkDataBase();
-
-        if(dbExist){
-            //do nothing - database already exist
-        }else{
+//        boolean dbExist = checkDataBase();
+//
+//        if(dbExist){
+//            //do nothing - database already exist
+//        }else{
 
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
@@ -59,35 +68,30 @@ public class DB extends SQLiteOpenHelper {
             } catch (IOException e) {
                 throw new Error("Error copying database");
             }
-        }
+//        }
 
     }
 
     // Check if the database exist to avoid re-copy the data
     private boolean checkDataBase(){
 
+        boolean exists;
         SQLiteDatabase checkDB = null;
 
         try{
-
-
             String path = DB_PATH + DB_NAME;
             checkDB = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
 
         }catch(SQLiteException e){
-
             // database don't exist yet.
             e.printStackTrace();
-
         }
-
-        if(checkDB != null){
-
+        exists = (checkDB != null);
+        if(exists){
             checkDB.close();
-
         }
 
-        return checkDB != null ? true : false;
+        return exists;
     }
 
     // copy your assets db to the new system DB
@@ -95,15 +99,12 @@ public class DB extends SQLiteOpenHelper {
 
         //Open your local db as the input stream
         InputStream myInput = context.getAssets().open("LanguageAppDatabase.sqlite");
-        Log.w("DB", "1");
 
         // Path to the just created empty db
         String outFileName = DB_PATH + DB_NAME;
-        Log.w("DB", "2");
 
         //Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
-        Log.w("DB", "3");
 
         //transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
@@ -111,13 +112,11 @@ public class DB extends SQLiteOpenHelper {
         while ((length = myInput.read(buffer))>0){
             myOutput.write(buffer, 0, length);
         }
-        Log.w("DB", "4");
 
         //Close the streams
         myOutput.flush();
         myOutput.close();
         myInput.close();
-        Log.w("DB", "5");
     }
 
     //Open the database
@@ -168,7 +167,7 @@ public class DB extends SQLiteOpenHelper {
 
         try {
 
-            String      query  = "SELECT * FROM " + TABLE_LOCATION;
+            String      query  = "SELECT * FROM " + TABLE_DICT;
 
             SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
             Cursor      cursor  = db.rawQuery(query, null);
@@ -178,7 +177,6 @@ public class DB extends SQLiteOpenHelper {
 
             if (cursor.moveToFirst()) {
                 do {
-
                     Word word  = new Word();
                     word.id = Integer.parseInt(cursor.getString(0));
                     word.englishWord = cursor.getString(1);
@@ -190,7 +188,6 @@ public class DB extends SQLiteOpenHelper {
                     word.level = cursor.getString(7);
 
                     words.add(word);
-
                 } while (cursor.moveToNext());
             }
         } catch(Exception e) {
@@ -208,7 +205,7 @@ public class DB extends SQLiteOpenHelper {
 
         try {
 
-            String      query  = "SELECT * FROM " + TABLE_LOCATION  + " WHERE Level = '6'";
+            String      query  = "SELECT * FROM " + TABLE_DICT + " WHERE Level = '6'";
 
             SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
             Cursor      cursor  = db.rawQuery(query, null);
@@ -239,4 +236,45 @@ public class DB extends SQLiteOpenHelper {
 
         return words;
     }
+
+    // Get User Datafrom Dictionary!
+    public Cursor getData() {
+
+        try {
+            String query = "SELECT * FROM " + TABLE_DATA;
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            //Cursor      cursor  = db.rawQuery(query, null);
+            return db.rawQuery(query, null);
+        } catch (Exception e) {
+            Log.e("SQL", "SQLite error: getting user stats");
+            throw new Error("SQL TABLE UserData Error");
+        }
+    }
+
+    // Get User Datafrom Dictionary!
+    public Cursor getBadges() {
+
+        try {
+            String query = "SELECT * FROM " + TABLE_BADGES;
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            //Cursor      cursor  = db.rawQuery(query, null);
+            return db.rawQuery(query, null);
+        } catch (Exception e) {
+            Log.e("SQL", "SQLite error: getting user stats");
+            throw new Error("SQL TABLE UserData Error");
+        }
+    }
+
+    public boolean addUserDetails(String name, String age, String Level){
+        try {
+            String query = "UPDATE " + TABLE_DATA + " SET Name='" + name + "', Age='" + age + "' WHERE Age='0'";
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            db.execSQL(query);
+            return true;
+        } catch (Exception e) {
+            Log.e("SQL", "SQLite error: adding user stats");
+            return false;
+        }
+    }
+
 }
