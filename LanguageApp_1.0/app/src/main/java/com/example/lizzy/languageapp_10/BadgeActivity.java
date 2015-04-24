@@ -26,6 +26,7 @@ public class BadgeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_badge);
         ListView badgeListView = (ListView) findViewById(R.id.badgeListView);
+
         BadgeAdapter adapter = new BadgeAdapter(this, R.layout.badge_listitem, Settings.badges);
         Log.w("myapp", Settings.badges.size() + "");
         badgeListView.setAdapter(adapter);
@@ -68,7 +69,11 @@ public class BadgeActivity extends Activity {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = inflater.inflate(R.layout.badge_listitem, null);
             }
+
             Badge currentBadge = badges.get(position);
+            if (!currentBadge.achieved)
+                currentBadge = Settings.lockedBadge;
+
             if (currentBadge != null) {
                 BadgeView badgeImage = (BadgeView) v.findViewById(R.id.badgeimage);
                 TextView badgeText = (TextView) v.findViewById(R.id.badgedescription);

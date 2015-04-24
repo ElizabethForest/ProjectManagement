@@ -53,8 +53,9 @@ public class Badge {
         this.id = id;
     }
 
-    public void setAchieved(boolean achieved) {
+    public void setAchieved(boolean achieved, DB db) {
         this.achieved = achieved;
+        db.setBadgeCompleted(id);
     }
 
     public void setColumn(int column) {

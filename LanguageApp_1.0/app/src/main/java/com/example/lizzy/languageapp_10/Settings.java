@@ -18,6 +18,7 @@ public class Settings {
     public static boolean picGame = false;
     public static boolean dictViewed = false;
     public static ArrayList<Badge> badges;
+    public static Badge lockedBadge;
 
     public static void setUpBadges(DB db){
         badges = new ArrayList<Badge>();
@@ -29,6 +30,7 @@ public class Settings {
                 badges.add(badge);
             } while (cursor.moveToNext());
         }
+        lockedBadge = badges.remove(badges.size() -1);
 //        //TODO: Implement this with database stuff
 //        for (int i = 0; i < 6; i++){
 //            for (int j = 0; j < 7; j ++){

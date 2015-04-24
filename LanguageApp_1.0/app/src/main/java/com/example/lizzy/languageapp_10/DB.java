@@ -277,4 +277,15 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
+    public boolean setBadgeCompleted(String id){
+        try {
+            String query = "UPDATE " + TABLE_BADGES + " SET Achieved=1 WHERE id='" + id + "'";
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            db.execSQL(query);
+            return true;
+        } catch (Exception e) {
+            Log.e("SQL", "SQLite error: achieving badge " + id);
+            return false;
+        }
+    }
 }

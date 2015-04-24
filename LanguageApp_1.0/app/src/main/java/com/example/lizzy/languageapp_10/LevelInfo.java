@@ -26,6 +26,21 @@ public class LevelInfo extends Activity {
         if (levelLevel == Settings.currentLevel){
             Settings.currentLevel += 1;
         }
+        DB db = new DB(this);
+        switch (levelLevel){
+            case 1 :
+                for (Badge badge : Settings.badges){
+                    if (badge.getId().equals("l1")){
+                        if(db.open()){
+                            badge.setAchieved(true, db);
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        db.close();
         finish();
     }
 
