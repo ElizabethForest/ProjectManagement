@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -159,7 +160,6 @@ public class DB extends SQLiteOpenHelper {
     // PUBLIC METHODS TO ACCESS DB CONTENT
     //
 
-
     // Get All words from Dictionary!
     public List<Word> getWords() {
 
@@ -251,6 +251,99 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
+    public ArrayList<Word> getWordsByLetter(String letter) {
+
+        ArrayList<Word> words = null;
+        try {
+            String      query  = "SELECT * FROM " + TABLE_DICT + " WHERE EnglishWord LIKE '" + letter + "%'";
+            Log.w("DB",query);
+            SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
+            Cursor      cursor  = db.rawQuery(query, null);
+            // go over each row, build elements and add it to list
+            words = createWordList(cursor);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return words;
+    }
+
+    public ArrayList<Word> getWordsByCategory(String category){
+        ArrayList<Word> words = null;
+        try {
+            String      query  = "SELECT * FROM " + TABLE_DICT + " WHERE Category = '" + category + "'";
+            Log.w("DB",query);
+            SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
+            Cursor      cursor  = db.rawQuery(query, null);
+            // go over each row, build elements and add it to list
+            words = createWordList(cursor);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return words;
+    }
+
+    public ArrayList<Word> getWordsByLevel(int level){
+        ArrayList<Word> words = null;
+        try {
+            String      query  = "SELECT * FROM " + TABLE_DICT + " WHERE Level = '" + level + "'";
+            Log.w("DB",query);
+            SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
+            Cursor      cursor  = db.rawQuery(query, null);
+            // go over each row, build elements and add it to list
+            words = createWordList(cursor);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return words;
+    }
+
+    public ArrayList<Word> createWordList(Cursor cursor){
+        ArrayList<Word> words = new ArrayList<Word>();
+        if (cursor.moveToFirst()) {
+            do {
+                Word word  = new Word();
+                word.id = Integer.parseInt(cursor.getString(0));
+                word.englishWord = cursor.getString(1);
+                word.guguBadhunWord = cursor.getString(2);
+                word.definition = cursor.getString(3);
+                word.imageFile = cursor.getString(4);
+                word.soundFile = cursor.getString(5);
+                word.adult = cursor.getString(6);
+                word.level = cursor.getString(7);
+                words.add(word);
+            } while (cursor.moveToNext());
+
+        }
+        return words;
+    }
+
+    public Word getWord(String word){
+        Word theWord  = new Word();
+        try {
+            String      query  = "SELECT * FROM " + TABLE_DICT + " WHERE EnglishWord == '" + word + "'";
+            Log.w("DB",query);
+            SQLiteDatabase  db    = SQLiteDatabase.openDatabase( DB_PATH + DB_NAME , null, SQLiteDatabase.OPEN_READWRITE);
+            Cursor cursor  = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                    theWord.id = Integer.parseInt(cursor.getString(0));
+                    theWord.englishWord = cursor.getString(1);
+                    theWord.guguBadhunWord = cursor.getString(2);
+                    theWord.definition = cursor.getString(3);
+                    theWord.imageFile = cursor.getString(4);
+                    theWord.soundFile = cursor.getString(5);
+                    theWord.adult = cursor.getString(6);
+                    theWord.level = cursor.getString(7);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return theWord;
+    }
+
     // Get User Datafrom Dictionary!
     public Cursor getBadges() {
 
@@ -282,10 +375,26 @@ public class DB extends SQLiteOpenHelper {
             String query = "UPDATE " + TABLE_BADGES + " SET Achieved=1 WHERE id='" + id + "'";
             SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
             db.execSQL(query);
+            Log.w("DB", query);
             return true;
         } catch (Exception e) {
             Log.e("SQL", "SQLite error: achieving badge " + id);
             return false;
         }
     }
+
+    public boolean setLevel(int level){
+        try {
+            String query = "UPDATE " + TABLE_DATA+ " SET Level = '" + level + "'";
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            db.execSQL(query);
+            Log.w("DB", "query");
+        } catch (Exception e) {
+            Log.e("SQL", "SQLite error: achieving level " + level);
+            return false;
+        }
+
+        return true;
+    }
+
 }

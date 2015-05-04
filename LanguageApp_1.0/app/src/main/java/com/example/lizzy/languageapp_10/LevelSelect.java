@@ -22,7 +22,6 @@ public class LevelSelect extends Activity {
         LevelButton lb;
         int previousId = 0;
         for (int i = 0; i <= Settings.TOTAL_LEVELS; i++){
-            Log.w("MyApp", i + "");
             lb = new LevelButton(this, i);
             lb.setId((i + 1));
             lb.setHeight((int) getResources().getDimension(R.dimen.level_button_dimen));

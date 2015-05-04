@@ -23,13 +23,12 @@ public class MainActivity extends Activity {
         }
         db.close();
 
-        Toast.makeText(this, Settings.name, Toast.LENGTH_SHORT).show();
-
         if (Settings.name == null || Settings.name.equals("")){
             setContentView(R.layout.enter_name_age);
         } else {
             setContentView(R.layout.activity_welcome);
             ((TextView) findViewById(R.id.welcome)).setText("Welcome " + Settings.name);
+            ((TextView) findViewById(R.id.level)).setText("You are a level " + Settings.currentLevel);
         }
 
     }

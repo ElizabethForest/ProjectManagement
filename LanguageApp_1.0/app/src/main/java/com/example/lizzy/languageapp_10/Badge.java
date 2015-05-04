@@ -1,5 +1,7 @@
 package com.example.lizzy.languageapp_10;
 
+import android.util.Log;
+
 /**
  * Created by Lizzy on 11/04/2015.
  */
@@ -55,6 +57,7 @@ public class Badge {
 
     public void setAchieved(boolean achieved, DB db) {
         this.achieved = achieved;
+        Log.w("Badge", id);
         db.setBadgeCompleted(id);
     }
 

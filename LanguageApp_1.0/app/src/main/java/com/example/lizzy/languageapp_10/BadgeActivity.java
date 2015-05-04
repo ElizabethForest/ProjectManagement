@@ -52,6 +52,12 @@ public class BadgeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     class BadgeAdapter extends ArrayAdapter<Badge> {
 
         ArrayList<Badge> badges;
